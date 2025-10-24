@@ -9,6 +9,8 @@ EverPia 2: “Sobreviure en una empresa IT” és una simulació (massa realista
 
 Ara EverPia gestiona clients, contractes i serveis crítics 24/7. L’equip ha crescut, els projectes s’han multiplicat i el pressupost… bé, el pressupost segueix sent el mateix. Sou tècnics júnior del departament IT i us acaben d’assignar el vostre primer gran repte: mantenir viva la infraestructura d’EverPia.
 
+<img src=https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWI3YWxicnNra29uMHMyMjY5djdsMTNjd3pkcDEyaXM4cGF3cGZzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13rQ7rrTrvZXlm/giphy.gif>
+
 El vostre dia a dia: apagar focs, resoldre incidències, respondre tickets, mantenir sistemes, documentar-ho tot (abans que algú formategi per error) i, si queda temps, aprendre a no perdre els nervis. És la vida real dins una empresa IT: el caos ben documentat.
 
 ## Missió del projecte
