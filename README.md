@@ -88,8 +88,3 @@ Desglossament (percentatges indicatius dels elements a lliurar):
 ## Autor i data
 - Autor: Nitroxi  
 - Data: 2025-10-20
-
----
-Notes addicionals:
-- Aquest README està pensat com a fitxa principal del projecte a penjar al repositori del grup.  
-- Afegiu enllaços interns (carpetes de tasques, fitxers Tasca XX/README.md) i carpeta amb entregables (P01_P07) quan estiguin disponibles.
