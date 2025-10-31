@@ -3,6 +3,8 @@
 ## Breu descripció
 Com membres cada cop més integrats de l'equip tècnic de la consultora **EverPia**, teniu davant un nou repte. El vostre client, una empresa de màrqueting digital (**DigiCore**), que experimenta de tant en tant errors de connectivitat a certes aplicacions. El seu equip tècnic creu que la causa principal podria ser una **resolució de noms (DNS)** incorrecta o lenta. Se us ha encarregat realitzar una **auditoria teòrica i pràctica del servei DNS** per tal de formar el personal del client i oferir **eines de diagnosi ràpides**.
 
+![FOTICO](img/iimg.png) 
+
 ## Fase teòrica: Sessió formativa
 Com a part d’aquesta formació, caldrà que elaboreu un **material formatiu** pel personal del client. Per assegurar la màxima qualitat en els continguts, els vostres directors tècnics han preparat unes sessions prèvies, per tal que tingueu un domini dels conceptes que després haureu d’explicar. Aproximadament el conceptes que haureu d’explicar seran els següents:  
 **Jerarquia i Estructura:** Explicació de l'estructura en arbre del DNS (Root > TLDs > Segon Nivell).  
@@ -36,6 +38,9 @@ Executa `dig -x 147.83.2.135`
 
 ## Comprovació de Resolució amb nslookup (Multiplataforma)
 L’eina `nslookup` es troba a pràcticament a qualsevol sistema operatiu. Es pot usar de forma similar a `dig` incloent l’argument o si s’executa `nslookup` sense arguments, entrar en el mode interactiu, us apareix un prompt (>). Serà aquest mode el que explorareu. El mode és força senzill, bàsicament hi ha tres comandes a usar:  
+
+![fotico](img/img11.png)
+
 - `set type=` per indicar el tipus de consulta: A, AAA, MX, NS, SOA, TXT o ALL.  
 - `server IP` on IP és la IP del servidor de noms al que es vol fer la consulta, també es pot indicar el nom del servidor enlloc de la IP, per exemple, `server a9-66.akam.net`.  
 - `exit` que serveix per sortir de la comanda.
