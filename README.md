@@ -50,7 +50,7 @@ Desglossament (percentatges indicatius dels elements a lliurar):
 - Treball individual: cal treure nota mínima de 4 per poder fer la mitjana amb el treball en equip.
 
 ## Tasques a desenvolupar
-- T01 – Gestors de contrasenyes.
+- T01 – [Gestors de contrasenyes.](Tasca%2001/README.md) 
 - T02 – Gestió de l’emmagatzematge. Sessions teòriques.
 - T03 – Gestió flexible de discos (LVM i Espais d’emmagatzematge).
 - T04 – Serveis de Directori (LDAP).
