@@ -55,7 +55,7 @@ Desglossament (percentatges indicatius dels elements a lliurar):
 - T03 – Gestió flexible de discos (LVM i Espais d’emmagatzematge).
 - T04 – Serveis de Directori (LDAP).
 - T05 – Anàlisi de l’entorn: possibles models de negoci pels clients tecnològics de la consultoria.
-- T06 – Fonaments del servei DNS.
+- T06 – [Fonaments del servei DNS.](Tasca%2006/README.md)
 - T07 – Instal·lant un servidor de noms.
 - T08 – Sitemaps i infraestructura d’una pàgina web.
 - T09 – Càlcul de la petjada (empremta ecològica/energètica).
