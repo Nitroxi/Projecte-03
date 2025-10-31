@@ -140,3 +140,6 @@ per exemple, si vols que sigui una **frase llarga** o només **caràcters**, la 
 i també pots consultar l’**historial de contrasenyes generades**.
 
 ![img](img/img5.png)
+
+- [**Solució**](Solucio.md)
+- [**Tornar el projecte**](../README.md)
