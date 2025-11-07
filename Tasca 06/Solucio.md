@@ -99,5 +99,6 @@ A continuació, indiqueu que voleu consultar registres de tipus A i del domini `
 
 ![img](img/img60.png)
 
-
 ---
+
+- [**Tornar el README**](README.md)
