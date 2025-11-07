@@ -56,3 +56,6 @@ Escriure `server IP` i escriure la IP del primer servidor de noms del domini `te
 Finalment es vol comprovar el funcionament de la resolució local, útil per entorns de xarxa local on no es disposa de servidor de noms propi i que evita haver d’accedir a equips o recursos per la seva IP.
 
 **Activitat de la Fase Pràctica:** Crear un document `guia.md` del resultats i anàlisi que inclogui les captures de les 6 comandes anteriors i les explicacions relacionades, a més de les proves de resolució local.
+
+- [**Solució**](Solucio.md)
+- [**Tornar el projecte**](../README.md)
