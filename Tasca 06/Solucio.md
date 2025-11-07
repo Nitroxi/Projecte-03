@@ -1,77 +1,103 @@
-# T06: El servei de DHCP – Configuració pràctica
+# Fase Pràctica: Diagnosi de Noms (Auditoria amb CLI)
 
-Després de fer la instal·lació d’Ubuntu, hem d’activar la segona interfície i configurar-la en xarxa interna. 
+Heu de demostrar l'ús de les principals utilitats de diagnosi DNS en els diferents sistemes operatius que utilitza el client (Linux/macOS i Windows).
+Per a cada eina, executeu les comandes indicades a continuació contra el domini que s’indiqui explícitament i captureu/analitzeu els resultats.
+Per fer aquest demostració, caldrà usar un equip Zorin amb dues interfícies, la primera en NAT i la segona en adaptador pont amb la IP correctament configurada segons indicacions dels vostres responsables.
 
-![img](img/img1.png)
+---
 
-Quan ho tinguis, inicia el servidor, ves a `/etc/netplan` (abans intenta confirmar amb `ip a` quina interfície has de configurar) i obre l’arxiu per modificar-lo. 
+## A. Diagnosi Avançada amb dig (Linux / macOS)
 
-![img](img/img2.png)
+### **Comanda 1: Consulta Bàsica de Registre A**
 
-Per aplicar la configuració, hem d’executar `netplan apply` i verificar-ho amb `ip a`.
+![img](img/img1o.png)
 
-![img](img/img3.png)
-![img](img/img4.png)
+```
+dig xtec.cat A
+```
+**Anàlisi:**  
+Identifica la IP de resposta, el valor TTL i el servidor que ha respost a la consulta.
 
-Actualitzem i instal·lem el programa Kea. 
+- La resposta IP es: **83.247.151.214**
+- El TTL: **3600 segons**
+- El server que ha respost: **127.0.0.53**
 
-![img](img/img5.png)
-![img](img/img6.png)
+---
 
-Et sortirà un menú; posa el configured-random-password, ja que no el farem servir. 
+### **Comanda 2: Consulta de Servidors de Noms (NS)**
 
-![img](img/img7.png)
+![img](img/img20.png)
 
-Comprovem que s’hagi instal·lat amb `systemctl status nom_servei`.
+```
+dig tecnocampus.cat NS
+```
+**Anàlisi:**  
+Quins són els servidors de noms autoritatius per a aquest domini?  
+- *server autoritatius son els de la dreta: per exemple ns-535.awsdns-02.net*
 
-![img](img/img8.png)
+---
 
-Provem de parar i deshabilitar el servei.
+### **Comanda 3: Consulta Detallada SOA**
 
-![img](img/img9.png)
+![img](img/img30.png)
 
-I comprovem si s’ha aturat correctament. 
+```
+dig escolapia.cat SOA
+```
+**Anàlisi:**  
+Quina és la informació del correu de l'administrador i el número de sèrie del domini?
 
-![img](img/img10.png)
+- **El número de serie es: 1761028965**
 
-L’iniciem una altra vegada.
+---
 
-Ara hem d’anar a `/etc/kea` i canviar el nom de l’arxiu `kea-dhcp4.conf` a un altre. Després, clonant el repositori o editant-lo tu mateix, modifica l’arxiu amb la següent informació:
+### **Comanda 4: Consulta resolució inversa**
 
-- Subxarxa: `192.169.x.0/24` (on x és el teu número de llista)
-- Rang: de `192.169.x.100` a `192.169.x.200`
-- Porta d’enllaç: `192.169.x.254`
-- DNS: `8.8.8.8`
+![img](img/img40.png)
 
-I deshabilitem la IP de reserva, ja que no la farem servir de moment, ja sigui convertint-la en comentari o eliminant-la.
+```
+dig -x 147.83.2.135
+```
+**Anàlisi:**  
+Quina informació sobre els registres s’obté?
 
-![img](img/img11.png)
+- esquerra: IP (ex: 135.2.83.147)
+- dreta: nom (ex: barcelonatech-upc.eu.)
 
-Un cop acabat tot això, ho comprovem amb: `kea-dhcp4 -t kea-dhcp4.conf`
+---
 
-![img](img/img12.png)
+## Comprovació de Resolució amb nslookup (Multiplataforma)
 
-Reiniciem el servei amb `systemctl restart nom_servei` i comprovem amb `systemctl status`.
+L’eina nslookup es troba a pràcticament a qualsevol sistema operatiu. Es pot usar de forma similar a dig incloent l’argument o si s’executa nslookup sense arguments, entrar en el mode interactiu, us apareix un prompt (>). Serà aquest mode el que explorareu.
 
-Ara instal·lem Zorin OS. Un cop instal·lat, entrem a la terminal i fem `ip a` per veure la MAC de la interfície `enp0s8`. Quan ja ho tinguis, edita l’arxiu del servidor Kea i li assignem una IP reservada; a dalt, hi posem la MAC de la màquina Zorin. 
+![img](img/img113.png)
 
-![img](img/img13.png)
+El mode és força senzill, bàsicament hi ha tres comandes a usar:
 
-Reiniciem el servei per aplicar els canvis i, al client, desconnectem la segona interfície; hauria de tenir la IP reservada.
+- `set type=` per indicar el tipus de consulta: A, AAA, MX, NS, SOA, TXT o ALL.
+- `server IP` on IP és la IP del servidor de noms al que es vol fer la consulta, també es pot indicar el nom del servidor enlloc de la IP, per exemple, `server a9-66.akam.net`.
+- `exit` que serveix per sortir de la comanda.
 
-![img](img/img14.png)
+---
+
+### **Comanda 1: Consulta Bàsica no Autoritativa**
+Seleccionar `type=A` i com a domini de consulta `tecnocampus.cat`
+
+![img](img/img50.png)
+
+**Anàlisi:**  
+Per què indica que la resposta és no autoritativa?
+
+- *La resposta que ha donat no es oficial del domini sino d’un altre dns*
+
+---
+
+### **Comanda 2: Consultes autoritatives**
+Escriure `server IP` i escriure la IP del primer servidor de noms del domini `tecnocampus.cat` que s’ha obtingut d’una consulta anterior.
+
+A continuació, indiqueu que voleu consultar registres de tipus A i del domini `tecnocampus.cat`.
+
+![img](img/img60.png)
 
 
-Ara, per a la següent i última activitat, instal·lem Wireshark amb `apt install` i l’obrim amb la comanda `wireshark`. (Abans, a la xarxa interna, desconnecta el cable per fer-ho bé.) Dins l’aplicació, desactiva totes les interfícies menys `enp0s8`.
-
-![img](img/img15.png)
-
-Després, connecta el cable de la interfície 2 i s’hauria de veure com s’assigna una IP a la màquina.
-
-![img](img/img16.png)
-
-
-I ja estaria 👍
-
-- [**Tornar al README**](README.md)
-
+---
