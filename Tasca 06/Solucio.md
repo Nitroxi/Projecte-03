@@ -73,4 +73,5 @@ Després, connecta el cable de la interfície 2 i s’hauria de veure com s’as
 
 I ja estaria 👍
 
-[Tornar README](
+- [**Tornar al README**](README.md)
+
