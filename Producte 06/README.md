@@ -12,5 +12,5 @@ Tal com es va indicar a la tasca, pengeu el vídeo en alguna plataforma, per exe
 Presentar continguts en formats alternatius.
 
 ---
-[Video DNS](Video.md)
-Tornar al Projecte(.../README.md)
+- [**Video DNS**](Video.md)
+- [**Tornar el projecte**](../README.md)
