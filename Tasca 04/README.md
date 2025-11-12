@@ -10,6 +10,8 @@ Actualment, cada servei intern (servidor de fitxers, wiki de documentació, etc.
 - **Risc de Seguretat:** Els usuaris sovint acaben reutilitzant contrasenyes entre serveis per evitar l'oblit.
 - **Manca d'Escalabilitat:** A mesura que Innovatech afegeix nous serveis, el problema es fa insostenible.
 
+![img](img/t04.png)
+
 ---
 
 El CEO d’Innovatech ha contactat amb EverPia per tal d’implementar una solució d’autenticació centralitzada. La solució proposada és utilitzar **OpenLDAP (Lightweight Directory Access Protocol)** per ser una solució robusta i de codi obert, que s’alinea amb l’esperit d’Innovatech, ja que tots els ordinadors de l’empresa usen **GNU-Linux**.
