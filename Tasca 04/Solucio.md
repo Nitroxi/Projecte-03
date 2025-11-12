@@ -28,7 +28,7 @@ ip a
 Si la interfície `enp0s8` no té IP, la configurarem activant el **DHCP** i editant el fitxer de **netplan**:
 
 ```bash
-sudo nano /etc/netplan/01-netcfg.yaml
+sudo nano /etc/netplan/50-cloud-init.yaml
 sudo netplan apply
 ```
 
