@@ -1,167 +1,236 @@
-# **T04: SERVEIS DE DIRECTORI. LDAP**
+# 🧩 Servei de Directori LDAP
 
-**CFGM SISTEMES MICROINFORMÀTICS I XARXES 2B**
+Configuració i gestió d’un servidor **LDAP** (Lightweight Directory Access Protocol) amb clients **Zorin OS**.  
+Pràctica tècnica **T04**.
 
-**Nezar Mghari Boussaada**
+---
 
-Per començar, la xarxa tindrà dues interfícies: una per comunicar-se i
-una altra perquè es pugui comunicar amb el client. A la interfície 1
-posarem NAT i a la interfície 2 posarem Host Only.
+## 1. 🌐 Configuració inicial de la xarxa
 
-![img2](img/img2.png)
+Per començar, la xarxa tindrà **dues interfícies**: una per comunicar-se i una altra perquè el client es pugui comunicar amb el servidor.  
+- A la **interfície 1** posarem **NAT**.  
+- A la **interfície 2** posarem **Host Only**.
 
-![img3](img/img3.png)
+Configura els adaptadors a la màquina virtual segons correspongui.
 
-Després haurem d'executar el comandament "ip a" per veure la seva IP. Si
-la interfície enp0s8 no té IP, la configurarem activant el DHCP editant
-l'arxiu netplan.
+<p align="center"><img src="img/img2.png"></p>
 
-![img4](img/img4.png)
+---
 
-Primer començarem configurant el nom i el domini del servidor.
+## 2. 🛠️ Configuració d’IP i DHCP
 
-Després instal·larem LDAP amb la comanda apt install slapd ldap-utils
--y, i ens tocarà posar-li una contrasenya.
+Un cop engegat el servidor, podem comprovar la IP amb:
 
-A continuació, comprovem que el servei funcioni amb la comanda
-"systemctl status slapd".
+```bash
+ip a
+```
 
-![img5](img/img5.png)
+Si la interfície `enp0s8` no té IP, la configurarem activant el **DHCP** i editant el fitxer de **netplan**:
 
-Després comprovem amb la comanda "slapcat" si hi ha l'usuari que
-necessitem.
+```bash
+sudo nano /etc/netplan/01-netcfg.yaml
+sudo netplan apply
+```
 
-![img6](img/img6.png)
+<p align="center"><img src="img/img3.png"></p>
 
-Si el nom no coincideix amb allò que volem, l'haurem de tornar a
-configurar amb la comanda dpkg-reconfigure slapd. Posem el nom del DNS
-que volem. En el meu cas és innovatech20.test.
+---
 
-![img7](img/img7.png)
+## 3. 🔧 Instal·lació del servidor LDAP
 
-Li posem que sí.
+Instal·lem els paquets necessaris:
 
-![img8](img/img8.png)
+```bash
+sudo apt update
+sudo apt install slapd ldap-utils -y
+```
 
-Li posem una contrasenya segura, en aquest cas p@ssw0rd.
+Durant la instal·lació, ens demanarà una contrasenya per a l’administrador de LDAP.
 
-També li posem que sí.
+<p align="center"><img src="img/img4.png"></p>
 
-![img9](img/img9.png)
+Per comprovar que el servei funciona:
 
-Un cop fet, tornem a comprovar amb "slapcat" si s'ha configurat
-correctament.
+```bash
+sudo systemctl status slapd
+```
 
-Ara crearem un fitxer LDIF per definir una OU. En aquest arxiu posarem
-l'OU d'usuaris i de grups. Hauria de quedar més o menys així:
+<p align="center"><img src="img/img5.png"></p>
 
-![img10](img/img10.png)
+Consultem les entrades amb:
 
-Després utilitzarem la comanda "ldapadd" per crear entrades al servidor
-i posarem la contrasenya.
+```bash
+sudo slapcat | grep dn
+```
 
-![img11](img/img11.png)
+<p align="center"><img src="img/img6.png"></p>
 
-![img12](img/img12.png)
+---
 
-Després consultarem amb "ldapsearch" per mostrar les OUs creades.
+## 4. 🧾 Reconfiguració i domini
 
-Ara instal·lem el ldap account manager amb la següent comanda: sudo apt
-install ldap-account-manager -y
+Per ajustar el domini LDAP:
 
-![img13](img/img13.png)
+```bash
+sudo dpkg-reconfigure slapd
+```
 
-Ara comprovem entrant al panell LDAP
+<p align="center"><img src="img/img7.png"></p>
 
-![img14](img/img14.png)
+Acceptem la reconfiguració:
 
-Ara configurem les següents coses:
+<p align="center"><img src="img/img8.png"></p>
 
-En preferències del servidor, a Direcció del servidor, posem l'adreça IP
-del nostre servidor i la llista d'usuaris vàlids.
+Posem la contrasenya:
 
-Aquí només canviem el sufix de l'arbre.
+<p align="center"><img src="img/img9.png"></p>
 
-![img15](img/img15.png)
+Comprovació:
 
-Ara canviem els sufixos LDAP dels grups i usuaris.
+```bash
+sudo slapcat
+```
 
-![img16](img/img16.png)
+---
 
-Per últim, si vols, pots canviar la contrasenya.
+## 5. 🗂️ Creació de l’estructura LDAP (LDIF)
 
-![img17](img/img17.png)
+Fitxer base LDIF:
 
-Ara entrem i creem els usuaris i els grups (és el mateix procés per a
-tots dos, així que només posarem les captures de l'usuari).
+<p align="center"><img src="img/img10.png"></p>
 
-Li hem de fer clic a "Nou usuari"
+Aplica’l:
 
-![img18](img/img18.png)
+```bash
+sudo ldapadd -x -D "cn=admin,dc=ldap,dc=local" -W -f base.ldif
+```
 
-Posem com a cognom el nom que vulguem; en el meu cas serà "usuari".
+---
 
-![img19](img/img19.png)
+## 6. 🔍 Comprovació de OUs i ús de LAM
 
-Cliquem a l'apartat Unix. Aquí podem modificar el nom comú, usuari, grup
-i altres paràmetres. Jo no modificaré res; només editaré el grup perquè
-tingui el que he creat prèviament.
+Consulta de dades LDAP:
 
-![img20](img/img20.png)
+```bash
+ldapsearch -x -b dc=ldap,dc=local
+```
 
-I, per últim, li assignem una contrasenya; s'ubica a la part de dalt.
+<p align="center"><img src="img/img11.png"></p>
 
-I creem la contrasenya i la guardem.
+Instal·lació del **LDAP Account Manager**:
 
-![img21](img/img21.png)
+```bash
+sudo apt install ldap-account-manager -y
+```
 
-Ara haurem de configurar el client ZORIN; el primer serà posar dos
-adaptadors: NAT i "Adaptador només anfitrió".
+<p align="center"><img src="img/img12.png"></p>
 
-![img22](img/img22.png)
+Accés via navegador:
 
-Un cop dins del client, haurem de configurar el nom de l'equip perquè
-sigui igual al domini del servidor. Si s'han aplicat els canvis
-correctament, s'haurà de veure el nou nom de l'equip.
+<p align="center"><img src="img/img13.png"></p>
 
-![img23](img/img23.png)
+Configuració del servidor:
 
-Ara també instal·larem al client l'LDAP perquè es pugui comunicar amb el
-servidor amb: sudo apt install libnss-ldap libpam-ldap nss-pam-ldapd
-nscd -y
+<p align="center"><img src="img/img14.png"></p>
 
-La configuració és pràcticament igual que la primera vegada, excepte per
-tres apartats: aquí poses l'última versió disponible.
+Modificació del sufix del servidor:
 
-![img24](img/img24.png)
+<p align="center"><img src="img/img15.png"></p>
 
-Posa que sí
+Configuració de grups i usuaris:
 
-Posa que no
+<p align="center"><img src="img/img16.png"></p>
 
-![img25](img/img25.png)
+Opció de canvi de contrasenya:
 
-Per comprovar si es connecta bé amb el servidor, farem una consulta amb
-ldapsearch; ens hauria de sortir alguna cosa així:
+<p align="center"><img src="img/img17.png"></p>
 
-Ara configurarem una sèrie d'arxius començant amb nsswitch.conf
+---
 
-![img26](img/img26.png)
+## 7. 👥 Creació d’usuaris i grups
 
-Ara haurem d'eliminar una part de la comanda que posi
-use_authok.
+Crear nou usuari:
 
-Ara haurem d'escriure una nova línia a l'arxiu common-session perquè es puguin crear comandes automàtiques.
+<p align="center"><img src="img/img18.png"></p>
 
-![img27](img/img27.png)
+Afegim el cognom *usuari*:
 
-Ara reiniciem el servei amb la comanda "sudo systemctl restart nscd" i
-verifiquem l'estat amb "systemctl status nscd".
+<p align="center"><img src="img/img19.png"></p>
 
-Després haurem de comprovar si s'han creat els usuaris que vam crear amb
-"getent passwd | tail"
+Configuració Unix:
 
-![img28](img/img28.png)
+<p align="center"><img src="img/img20.png"></p>
 
-I ja estaria 👍
+Assignem contrasenya:
+
+<p align="center"><img src="img/img21.png"></p>
+
+---
+
+## 8. 💻 Configuració del client Zorin
+
+Configura NAT + Host Only:
+
+<p align="center"><img src="img/img22.png"></p>
+
+Nom del client:
+
+<p align="center"><img src="img/img23.png"></p>
+
+---
+
+## 9. 🧰 Instal·lació del client LDAP
+
+```bash
+sudo apt install libnss-ldap libpam-ldap nss-pam-ldapd nscd -y
+```
+
+<p align="center"><img src="img/img24.png"></p>
+
+Configuració: posar **sí** on toca.
+
+<p align="center"><img src="img/img25.png"></p>
+
+---
+
+## 10. 📄 Configuració d’arxius del sistema
+
+Fitxer `nsswitch.conf`:
+
+<p align="center"><img src="img/img26.png"></p>
+
+Fitxer `common-session`:
+
+```bash
+session required pam_mkhomedir.so skel=/etc/skel umask=0022
+```
+
+<p align="center"><img src="img/img27.png"></p>
+
+Reinicia:
+
+```bash
+sudo systemctl restart nscd
+sudo systemctl status nscd
+```
+
+---
+
+## 11. ✅ Verificació final
+
+Comprovació d’usuaris:
+
+```bash
+getent passwd | tail
+```
+
+<p align="center"><img src="img/img28.png"></p>
+
+---
+
+# ✔️ Conclusió
+
+Si tot ha anat bé, el servidor LDAP i el client Zorin funcionen correctament i els usuaris LDAP es poden autenticar sense problemes.
+
+🧩 *Pràctica T04 – Serveis de Directori LDAP completada.*
 
