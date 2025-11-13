@@ -225,6 +225,8 @@ getent passwd | tail
 ```
 <p align="center"><img src="img/imgend.png"></p>
 
+I ja estaria 👍
+
 <p align="center"><img src="img/img28.png"></p>
 
 ---
