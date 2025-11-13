@@ -223,6 +223,7 @@ Comprovació d’usuaris:
 ```bash
 getent passwd | tail
 ```
+<p align="center"><img src="img/imgend.png"></p>
 
 <p align="center"><img src="img/img28.png"></p>
 
