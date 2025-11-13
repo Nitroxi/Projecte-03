@@ -202,7 +202,7 @@ Fitxer `nsswitch.conf`:
 Fitxer `common-session`:
 
 ```bash
-session required pam_mkhomedir.so skel=/etc/skel umask=0022
+session required pam_mkhomedir.so skel=/etc/skel umask=077
 ```
 
 <p align="center"><img src="img/img27.png"></p>
