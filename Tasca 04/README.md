@@ -33,3 +33,5 @@ A més, configurareu un equip client per tal que utilitzi el directori per auten
 
 S’ha redactat un document on s’especifica clarament la feina que s’ha de desenvolupar; el teniu disponible en el plec de condicions tècniques (també el podeu trobar al Moodle de l’assignatura).
 
+- [**Solució**](Solucio.md)
+- [**Tornar el projecte**](../README.md)
