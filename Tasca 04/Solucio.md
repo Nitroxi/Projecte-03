@@ -237,3 +237,4 @@ Si tot ha anat bé, el servidor LDAP i el client Zorin funcionen correctament i 
 
 🧩 *Pràctica T04 – Serveis de Directori LDAP completada.*
 
+- [**Tornar el README.md**](README.md)
