@@ -51,23 +51,23 @@ Desglossament (percentatges indicatius dels elements a lliurar):
 
 ## Tasques a desenvolupar
 - T01 – [Gestors de contrasenyes.](Tasca%2001/README.md) 
-- T02 – Gestió de l’emmagatzematge. Sessions teòriques.
-- T03 – Gestió flexible de discos (LVM i Espais d’emmagatzematge).
-- T04 – Serveis de Directori (LDAP).
-- T05 – Anàlisi de l’entorn: possibles models de negoci pels clients tecnològics de la consultoria.
+- T02 – [Gestió de l’emmagatzematge. Sessions teòriques.](Tasca%2002/README.md)
+- T03 – [Gestió flexible de discos (LVM i Espais d’emmagatzematge).](Tasca%2003/README.md)
+- T04 – [Serveis de Directori (LDAP).](Tasca%2004/README.md)
+- T05 – [Anàlisi de l’entorn: possibles models de negoci pels clients tecnològics de la consultoria.](Tasca%2005/README.md)
 - T06 – [Fonaments del servei DNS.](Tasca%2006/README.md)
-- T07 – Instal·lant un servidor de noms.
-- T08 – Sitemaps i infraestructura d’una pàgina web.
-- T09 – Càlcul de la petjada (empremta ecològica/energètica).
+- T07 – [Instal·lant un servidor de noms.](Tasca%2007/README.md)
+- T08 – [Sitemaps i infraestructura d’una pàgina web.](Tasca%2008/README.md)
+- T09 – [Càlcul de la petjada (empremta ecològica/energètica).](Tasca%2009/README.md)
 
 ## Productes finals a lliurar
-- P01: Kanban del projecte.
-- P02: Repositori GitHub amb tota la documentació del projecte.
-- P03: Rèplica de la web del client (Web rèplica).
-- P04: Configuració i desplegament d’un servidor DNS operatiu.
-- P05: Presentació comparativa: LVM vs Espais d’emmagatzematge (Windows vs Linux).
-- P06: Vídeo per parelles explicant els fonaments del DNS.
-- P07: Infografia de sostenibilitat (Solució TecnoGestió).
+- P01: [Kanban del projecte.](Producte%2001/README.md)
+- P02: [Repositori GitHub amb tota la documentació del projecte.](Producte%2002/README.md)
+- P03: [Rèplica de la web del client (Web rèplica).](Producte%2003/README.md)
+- P04: [Configuració i desplegament d’un servidor DNS operatiu.](Producte%2004/README.md)
+- P05: [Presentació comparativa: LVM vs Espais d’emmagatzematge (Windows vs Linux).](Producte%2005/README.md)
+- P06: [Vídeo per parelles explicant els fonaments del DNS.](Producte%2006/README.md)
+- P07: [Infografia de sostenibilitat (Solució TecnoGestió).](Producte%2007/README.md)
 
 ## Competències desenvolupades
 - Tècniques: administració de sistemes Linux, gestió d’emmagatzematge, serveis de xarxa, DNS, LDAP.
